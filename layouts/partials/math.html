@@ -1,0 +1,32 @@
+{{- /* KaTeX — no SRI hashes (integrity mismatch silently blocks CSS load); DOMContentLoaded
+     fires after all deferred scripts execute, so renderMathInElement is always defined. */ -}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+{{- /* Inline style placed AFTER katex.min.css so it wins the cascade over
+     katex's own .katex{font-size:1.21em}. Our bundled stylesheet loads first
+     in <head> and loses to the CDN file; this block loads last and wins. */ -}}
+<style>
+  .katex         { font-size: 1em; font-weight: 400; color: inherit; vertical-align: -0.04em; }
+  .katex-display { margin: 1.4em 0; overflow: visible; white-space: normal; }
+  .katex-display > .katex { overflow: visible; white-space: normal; }
+  .algo-body .katex { font-size: 0.95em; vertical-align: 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Scope auto-render to math-bearing regions to avoid a full-DOM walk. */
+    var roots = document.querySelectorAll('.project-content, .hero-abstract, .algo-body, .project-references, figcaption');
+    var opts = {
+      delimiters: [
+        { left: "$$", right: "$$", display: true  },
+        { left: "$",  right: "$",  display: false }
+      ],
+      throwOnError: false
+    };
+    if (roots.length) {
+      roots.forEach(function (el) { renderMathInElement(el, opts); });
+    } else {
+      renderMathInElement(document.body, opts);
+    }
+  });
+</script>

@@ -1,0 +1,24 @@
+{{- $title := .Get "title" | default "Algorithm" -}}
+{{- $body := .Inner -}}
+{{- $body = strings.TrimPrefix "\n" $body -}}
+{{- $body = strings.TrimSuffix "\n" $body -}}
+{{- $lines := split $body "\n" -}}
+<div class="algo-block">
+  <div class="algo-header">{{ $title }}</div>
+  <div class="algo-body">
+{{- range $lines -}}
+{{- $line := . -}}
+{{- $level := 0 -}}
+{{- range seq 1 12 -}}
+  {{- if hasPrefix $line "  " -}}
+    {{- $line = substr $line 2 -}}
+    {{- $level = add $level 1 -}}
+  {{- end -}}
+{{- end -}}
+{{- $line = replaceRE `\*\*([^*]+?)\*\*` `<b class="algo-kw">$1</b>` $line -}}
+{{- $line = replaceRE `::([^:]+?)::` `<span class="algo-fn">$1</span>` $line -}}
+{{- $line = replaceRE `(\s\s)//\s+(.*)$` `$1<span class="algo-comment">// $2</span>` $line -}}
+<div class="algo-line"{{ if gt $level 0 }} style="padding-left:{{ mul $level 1.4 }}em"{{ end }}>{{ if eq (trim $line " \t") "" }}&nbsp;{{ else }}{{ $line | safeHTML }}{{ end }}</div>
+{{- end -}}
+  </div>
+</div>

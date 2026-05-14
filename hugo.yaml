@@ -1,0 +1,35 @@
+baseURL: "https://fdrl-maritime.github.io/"
+languageCode: en-us
+title: "Falsification-Driven RL"
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+disableKinds:
+  - taxonomy
+  - term
+  - section
+  - RSS
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - $$
+              - $$
+          inline:
+            - - $
+              - $
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false

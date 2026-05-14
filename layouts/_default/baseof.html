@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language }}">
+
+<head>
+    {{- partial "head.html" . }}
+</head>
+
+<body id="top">
+
+    <main class="main">
+        {{- block "main" . }}{{ end }}
+    </main>
+
+    <script>
+    window.mmHighlightBibtex = function(selector) {
+      document.querySelectorAll(selector).forEach(function(block) {
+        var text = block.textContent;
+        var lines = text.split('\n');
+        while (lines.length && lines[0].trim() === '') lines.shift();
+        while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
+        var result = [];
+        var firstEntry = true;
+        for (var i = 0; i < lines.length; i++) {
+          var raw = lines[i];
+          var trimmed = raw.trim();
+          if (!trimmed) { result.push(''); continue; }
+          if (firstEntry && /^@\w+\{/.test(trimmed)) {
+            var line = trimmed.replace(/^(@\w+\{)([^,}]*)/, function(m, type, key) {
+              firstEntry = false;
+              return '<span class="bib-type">' + type + '</span><span class="bib-key">' + key + '</span>';
+            });
+            result.push(line); continue;
+          }
+          if (trimmed === '}') { result.push('}'); continue; }
+          var fm = trimmed.match(/^(\w+)(\s*=\s*)(.*)$/);
+          if (fm) {
+            var rest = fm[3].replace(/^\{([\s\S]*)\}(,?\s*)$/, '{<span class="bib-value">$1</span>}$2');
+            result.push('  <span class="bib-field">' + fm[1] + '</span>' + fm[2] + rest);
+            continue;
+          }
+          result.push('  ' + trimmed);
+        }
+        block.innerHTML = result.join('\n');
+      });
+    };
+
+    var CLIP_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="12" height="12"><path fill="currentColor" d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>';
+    var CHECK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="12" height="12"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>';
+    window.mmClipSVG = CLIP_SVG;
+    window.mmCheckSVG = CHECK_SVG;
+    window.mmCopyWithFeedback = function(btn, text) {
+      navigator.clipboard.writeText(text).then(function() {
+        btn.innerHTML = CHECK_SVG;
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = CLIP_SVG;
+          btn.classList.remove('copied');
+        }, 1500);
+      }).catch(function(err) { console.error('Copy failed:', err); });
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.scroll-indicator[data-target]').forEach(function(si) {
+        si.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = document.querySelector(si.getAttribute('data-target'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    });
+    </script>
+</body>
+
+</html>

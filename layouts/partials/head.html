@@ -1,0 +1,25 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+
+<title>{{ .Title }}</title>
+
+{{- $desc := .Params.abstract | default "" | plainify }}
+{{- if $desc }}
+<meta name="description" content="{{ $desc | truncate 200 }}">
+{{- end }}
+<meta name="author" content="Marlon Müller, Florian Finkeldei, Hanna Krasowski, Murat Arcak, Matthias Althoff">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ .Title }}">
+{{- if $desc }}
+<meta property="og:description" content="{{ $desc | truncate 200 }}">
+{{- end }}
+<meta property="og:url" content="{{ .Permalink }}">
+
+{{- $css := resources.Get "css/custom.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+
+{{- partial "extend_head.html" . -}}

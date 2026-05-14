@@ -1,0 +1,9 @@
+{{- $arg := .Get 0 -}}
+{{- $nums := split (printf "%v" $arg) "," -}}
+{{- $first := true -}}
+{{- range $nums -}}
+  {{- $n := trim . " " -}}
+  {{- if not $first }}, {{ end -}}
+  <a href="#ref-{{ $n }}" class="cite">[{{ $n }}]</a>
+  {{- $first = false -}}
+{{- end -}}

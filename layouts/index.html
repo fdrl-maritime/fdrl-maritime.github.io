@@ -1,0 +1,159 @@
+{{- define "main" }}
+
+<div class="project-page">
+
+  <header class="project-hero">
+
+    <div class="hero-inner">
+
+      {{- with .Params.venue }}
+      <div class="project-badges">
+        <span class="venue-badge">{{ . }}</span>
+      </div>
+      {{- end }}
+
+      <h1 class="project-title">{{ .Title }}</h1>
+
+      {{- if .Params.authors }}
+      <div class="project-authors">
+        {{- range $i, $a := .Params.authors }}
+          {{- if $i }}<span class="author-sep">,&nbsp;</span>{{- end }}
+          {{- if $a.url }}
+            <a href="{{ $a.url }}" target="_blank" rel="noopener noreferrer" class="author-link">{{- $a.name -}}{{- with $a.affiliation }}<sup class="author-sup">{{ . }}</sup>{{- end -}}</a>
+          {{- else }}
+            <span class="author-name">{{- $a.name -}}{{- with $a.affiliation }}<sup class="author-sup">{{ . }}</sup>{{- end -}}</span>
+          {{- end }}
+        {{- end }}
+      </div>
+      {{- end }}
+
+      {{- with .Params.affiliations }}
+      <div class="project-affiliations">
+        {{- range $i, $a := . }}{{- if $i }},&ensp;{{ end }}<span class="affil-item"><span class="affil-num">{{ $a.num }}</span>{{ $a.name }}</span>{{- end }}
+      </div>
+      {{- end }}
+
+      {{- with .Date }}
+      <div class="hero-meta">
+        <time class="meta-item" datetime="{{ .Format "2006-01-02" }}">{{ .Format "January 2006" }}</time>
+      </div>
+      {{- end }}
+
+      {{- $hasLinks := or .Params.pdf .Params.arxiv .Params.code }}
+      {{- if $hasLinks }}
+      <div class="project-links">
+        {{- with .Params.pdf }}
+        <a href="{{ . | safeURL }}" target="_blank" rel="noopener noreferrer" class="project-btn" aria-label="Download paper PDF">
+          <svg role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/></svg>
+          <span>Paper</span>
+        </a>
+        {{- end }}
+        {{- with .Params.arxiv }}
+        <a href="{{ . | safeURL }}" target="_blank" rel="noopener noreferrer" class="project-btn" aria-label="View on arXiv">
+          <svg role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/></svg>
+          <span>arXiv</span>
+        </a>
+        {{- end }}
+        {{- with .Params.code }}
+        <a href="{{ . | safeURL }}" target="_blank" rel="noopener noreferrer" class="project-btn" aria-label="View code repository">
+          <svg role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg>
+          <span>Code</span>
+        </a>
+        {{- end }}
+      </div>
+      {{- end }}
+
+      {{- with .Params.abstract }}
+      <div class="hero-abstract">
+        <p>{{ . | safeHTML }}</p>
+      </div>
+      {{- end }}
+
+    </div>
+
+    {{- if .Params.content_public }}
+    <button type="button" class="scroll-indicator" data-target=".project-reading-zone" aria-label="Scroll to content">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </button>
+    {{- end }}
+  </header>
+
+  {{- if .Params.content_public }}
+  <div class="project-reading-zone">
+
+  {{- if .Content }}
+  <div class="project-content">
+    {{ .Content }}
+  </div>
+  {{- end }}
+
+  {{- with .Params.bibtex }}
+  <section class="project-section project-citation">
+    <div class="section-label-row">
+      <h2 class="section-label">BibTeX</h2>
+      <button type="button" class="copy-btn bibtex-copy-btn" aria-label="Copy BibTeX">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="12" height="12"><path fill="currentColor" d="M384 336l-192 0c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l140.1 0L400 115.9 400 320c0 8.8-7.2 16-16 16zM192 384l192 0c35.3 0 64-28.7 64-64l0-204.1c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1L192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-32-48 0 0 32c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l32 0 0-48-32 0z"/></svg>
+      </button>
+    </div>
+    <pre class="bibtex-pre"><code class="language-bibtex">{{ . }}</code></pre>
+  </section>
+  {{- end }}
+
+  {{- with .Params.acknowledgments }}
+  <section class="project-section project-acknowledgments">
+    <h2 class="section-label">Acknowledgments</h2>
+    <p class="plain-section-body">{{ . | safeHTML }}</p>
+  </section>
+  {{- end }}
+
+  {{- with .Params.references }}
+  <section class="project-section project-references">
+    <h2 class="section-label">References</h2>
+    <div class="ref-list">
+      {{- range $i, $ref := . }}
+      {{- $n := add $i 1 }}
+      {{- $text := "" }}
+      {{- $url := "" }}
+      {{- if reflect.IsMap $ref }}
+        {{- $text = index $ref "text" }}
+        {{- $url = index $ref "url" }}
+      {{- else }}
+        {{- $text = $ref }}
+      {{- end }}
+      {{- if $url }}
+      <a class="ref-item ref-item-link" id="ref-{{ $n }}" href="{{ $url }}" target="_blank" rel="noopener noreferrer">
+        <span class="ref-num">[{{ $n }}]</span>
+        <span class="ref-body">{{ $text | $.Page.RenderString }}</span>
+      </a>
+      {{- else }}
+      <div class="ref-item" id="ref-{{ $n }}">
+        <span class="ref-num">[{{ $n }}]</span>
+        <span class="ref-body">{{ $text | $.Page.RenderString }}</span>
+      </div>
+      {{- end }}
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  </div>
+  {{- end }}
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    window.mmHighlightBibtex('.bibtex-pre code.language-bibtex');
+    document.querySelectorAll('.bibtex-copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = btn.closest('.project-citation');
+        var code = section && section.querySelector('.bibtex-pre code');
+        if (code) window.mmCopyWithFeedback(btn, code.textContent);
+      });
+    });
+  });
+</script>
+
+{{- end }}
