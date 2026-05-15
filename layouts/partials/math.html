@@ -6,7 +6,7 @@
      in <head> and loses to the CDN file; this block loads last and wins. */ -}}
 <style>
   .katex         { font-size: 1em; font-weight: 400; color: inherit; vertical-align: -0.04em; }
-  .katex-display { margin: 1.4em 0; overflow-x: auto; white-space: normal; }
+  .katex-display { margin: 1.4em 0; overflow: visible; white-space: normal; }
   .katex-display > .katex { overflow: visible; white-space: normal; }
   .algo-body .katex { font-size: 0.95em; vertical-align: 0; }
 </style>
@@ -28,5 +28,15 @@
     } else {
       renderMathInElement(document.body, opts);
     }
+    /* Wrap each display equation in a scroll container so wide equations
+       (e.g. the COLREGs spec) scroll horizontally on narrow screens without
+       breaking KaTeX's internal tag positioning (the `(N)` equation number). */
+    document.querySelectorAll('.katex-display').forEach(function (el) {
+      if (el.parentNode && el.parentNode.classList.contains('math-scroll')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'math-scroll';
+      el.parentNode.insertBefore(wrap, el);
+      wrap.appendChild(el);
+    });
   });
 </script>

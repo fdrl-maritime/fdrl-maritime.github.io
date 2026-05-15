@@ -679,12 +679,19 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   border-top: 1px solid var(--mm-table-group-border);
 }
 
-/* horizontally-scrollable wrapper for wide blocks (tables, etc.);
-   no @media — overflow-x:auto is a no-op when content fits */
-.table-scroll {
+/* horizontally-scrollable wrappers for wide blocks (tables, display math);
+   no @media — overflow-x:auto is a no-op when content fits.
+   .math-scroll is added at runtime around each .katex-display by math.html. */
+.table-scroll,
+.math-scroll {
   overflow-x: auto;
   max-width: 100%;
 }
+
+/* inside a scroll wrapper, let the table reach its natural width so the
+   wrapper scrolls — overrides the global .project-content table max-width:100%
+   that would otherwise crush the columns instead of letting them scroll */
+.table-scroll > table { max-width: none; }
 
 
 .algo-block {
@@ -911,6 +918,13 @@ a.ref-item-link:focus-visible {
   /* mobile: let figures fill the column — overrides the inline
      max-width:<X>% set on <img> by the figure shortcode */
   .project-content figure img { max-width: 100% !important; }
+
+  /* mobile: compact tables — smaller font, tighter padding */
+  .project-content table { font-size: var(--mm-text-2xs); }
+  .project-content th,
+  .project-content td {
+    padding: var(--mm-sp-1) var(--mm-sp-2);
+  }
 }
 
 
