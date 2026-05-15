@@ -3,5 +3,3 @@ resources/
 .hugo_build.lock
 .DS_Store
 .claude/
-static/images/
-static/pdfs/

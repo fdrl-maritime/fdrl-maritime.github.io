@@ -601,7 +601,7 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
 .project-content figure {
   display: block;
   margin: var(--mm-sp-10) auto;
-  max-width: min(580px, 100%);
+  max-width: 100%;
   counter-increment: figure;
 }
 
@@ -616,7 +616,8 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
 }
 
 .project-content figcaption {
-  margin-top: var(--mm-sp-3);
+  max-width: min(520px, 100%);
+  margin: var(--mm-sp-3) auto 0;
   font-size: var(--mm-text-sm);
   color: var(--mm-text-secondary);
   line-height: 1.55;
@@ -636,10 +637,11 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   text-align: left;
   font-size: var(--mm-text-sm);
   font-weight: 400;
-  font-style: italic;
-  color: var(--mm-text-muted);
+  color: var(--mm-text-secondary);
+  max-width: min(520px, 100%);
   padding: var(--mm-sp-2) 0 var(--mm-sp-3);
   line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .project-content table {
@@ -775,11 +777,6 @@ a.cite:focus-visible {
 }
 
 .ref-item:last-child { border-bottom: none; }
-
-.ref-item:target {
-  background: var(--mm-hover-bg);
-  padding-left: var(--mm-sp-3);
-}
 
 a.ref-item-link {
   cursor: pointer;
