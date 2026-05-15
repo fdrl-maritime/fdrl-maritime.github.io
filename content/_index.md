@@ -137,6 +137,7 @@ On the baseline evaluation distribution, the baseline policy shows the highest g
 compute the metrics in Table 1 differs from the scenario distributions used to train
 the falsification-driven agents.
 
+<div class="table-scroll">
 <table>
 <caption><strong>Table 1.</strong> Results on the baseline evaluation distribution. †All scenarios; ‡non-vacuous (engaged) scenarios only. Mean ± std over 10 seeds.</caption>
 <thead>
@@ -159,9 +160,11 @@ the falsification-driven agents.
 <tr><td>Robustness $\rho_\mathrm{out}$</td><td style="text-align:right">10.9 ± 2.2</td><td style="text-align:right">15.4 ± 3.0</td><td style="text-align:right">15.2 ± 2.6</td><td style="text-align:right">16.8 ± 3.8</td></tr>
 </tbody>
 </table>
+</div>
 
 On the falsification evaluation distribution (see Table 2), the goal-reaching rate decreases for all methods. For the baseline policy, compliance, including vacuous encounters, decreases to 57.6%, with a negative mean input robustness and an engagement of 66.1%. Excluding vacuous encounters, the compliance of the baseline agent reduces further to 35.9%. The falsification-driven policies also show higher engagement rates and maintain significantly higher compliance of at least 86% when including vacuous encounters and 72% when excluding them. The mean output robustness of the falsification-driven policies increases compared to the results on the baseline evaluation distribution. For the baseline policy, the output robustness even becomes negative (i.e., non-compliant).
 
+<div class="table-scroll">
 <table>
 <caption><strong>Table 2.</strong> Results on the falsification evaluation distribution. †All scenarios; ‡non-vacuous (engaged) scenarios only. Mean ± std over 10 seeds.</caption>
 <thead>
@@ -184,6 +187,7 @@ On the falsification evaluation distribution (see Table 2), the goal-reaching ra
 <tr><td>Robustness $\rho_\mathrm{out}$</td><td style="text-align:right">−2.1 ± 1.9</td><td style="text-align:right">19.2 ± 3.0</td><td style="text-align:right">19.8 ± 2.5</td><td style="text-align:right">20.7 ± 3.0</td></tr>
 </tbody>
 </table>
+</div>
 
 The results illustrate
 the underlying trade-off between rule compliance and goal-reaching. The agent should neither avoid encounters persistently nor

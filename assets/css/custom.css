@@ -679,6 +679,13 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   border-top: 1px solid var(--mm-table-group-border);
 }
 
+/* horizontally-scrollable wrapper for wide blocks (tables, etc.);
+   no @media — overflow-x:auto is a no-op when content fits */
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
 
 .algo-block {
   display: block;
@@ -891,6 +898,19 @@ a.ref-item-link:focus-visible {
   .project-reading-zone {
     padding: var(--mm-sp-10) var(--mm-sp-5) var(--mm-sp-12);
   }
+
+  /* mobile: drop justification — narrow columns produce visible rivers */
+  .project-content p,
+  .hero-abstract,
+  .plain-section-body {
+    text-align: left;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+
+  /* mobile: let figures fill the column — overrides the inline
+     max-width:<X>% set on <img> by the figure shortcode */
+  .project-content figure img { max-width: 100% !important; }
 }
 
 
