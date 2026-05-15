@@ -115,7 +115,6 @@
   --mm-focus-ring: 0 0 0 2px var(--mm-accent);
 }
 
-
 .project-reading-zone {
   color: var(--l-text);
   --mm-text:                var(--l-text);
@@ -141,7 +140,6 @@
   --mm-copy-success-border: var(--l-copy-success-border);
   --mm-table-group-border:  var(--l-table-group-border);
 }
-
 
 html, body { margin: 0; padding: 0; }
 
@@ -176,7 +174,6 @@ pre, code {
   }
 }
 
-
 h1, h2, h3 {
   font-family: var(--mm-font-sans);
   font-weight: 600;
@@ -205,7 +202,6 @@ a:hover {
 a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   text-decoration: none;
 }
-
 
 .section-label {
   display: block;
@@ -239,7 +235,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   padding-bottom: 0;
   border-bottom: none;
 }
-
 
 .copy-btn {
   display: inline-flex;
@@ -284,7 +279,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
 
 .copy-btn svg { width: 12px; height: 12px; fill: currentColor; }
 
-
 .scroll-indicator {
   position: absolute;
   bottom: var(--mm-sp-10);
@@ -319,7 +313,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   box-shadow: var(--mm-focus-ring);
   color: var(--mm-text-hover);
 }
-
 
 .project-btn {
   display: inline-flex;
@@ -366,7 +359,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   flex-shrink: 0;
 }
 
-
 .main:has(.project-page) { max-width: 100%; padding: 0; }
 
 .project-page {
@@ -377,7 +369,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   color: var(--mm-text);
   position: relative;
 }
-
 
 .project-hero {
   display: flex;
@@ -522,7 +513,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
 
 .hero-abstract p { margin: 0; }
 
-
 .project-reading-zone {
   background: var(--l-page-bg);
   width: 100%;
@@ -597,7 +587,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   text-decoration-color: currentColor;
 }
 
-
 .project-content figure {
   display: block;
   margin: var(--mm-sp-10) auto;
@@ -630,7 +619,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   font-weight: 600;
   color: var(--mm-text-secondary);
 }
-
 
 .project-content caption {
   caption-side: top;
@@ -679,24 +667,12 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   border-top: 1px solid var(--mm-table-group-border);
 }
 
-/* horizontally-scrollable wrapper for wide tables;
-   no @media — overflow-x:auto is a no-op when content fits */
 .table-scroll {
   overflow-x: auto;
   max-width: 100%;
 }
 
-/* inside a scroll wrapper, let the table reach its natural width so the
-   wrapper scrolls — overrides the global .project-content table max-width:100%
-   that would otherwise crush the columns instead of letting them scroll */
 .table-scroll > table { max-width: none; }
-
-/* .math-scroll wraps each .katex-display at runtime (see math.html).
-   No desktop styling — display equations always fit the 720px column,
-   so the wrapper is transparent. Scrolling is enabled only on mobile
-   below (the @media (max-width: 768px) block) to avoid a redundant
-   scrollbar on desktop (esp. macOS "Always show scrollbars"). */
-
 
 .algo-block {
   display: block;
@@ -748,7 +724,6 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
   color: var(--mm-text-muted);
   font-style: italic;
 }
-
 
 a.cite {
   font-size: inherit;
@@ -845,12 +820,10 @@ a.ref-item-link:focus-visible {
   text-decoration-color: currentColor;
 }
 
-
 .project-section {
   width: 100%;
   margin: var(--mm-sp-16) 0 0 0;
 }
-
 
 .bibtex-pre {
   font-family: ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
@@ -876,7 +849,6 @@ a.ref-item-link:focus-visible {
 
 .bib-type { font-weight: 600; }
 
-
 .plain-section-body {
   font-family: inherit;
   font-size: var(--mm-text-body);
@@ -889,7 +861,6 @@ a.ref-item-link:focus-visible {
   hyphens: auto;
   -webkit-hyphens: auto;
 }
-
 
 @media (max-width: 768px) {
 
@@ -910,30 +881,16 @@ a.ref-item-link:focus-visible {
     padding: var(--mm-sp-10) var(--mm-sp-5) var(--mm-sp-12);
   }
 
-  /* mobile: drop justification — narrow columns produce visible rivers */
-  .project-content p,
-  .hero-abstract,
-  .plain-section-body {
-    text-align: left;
-    hyphens: manual;
-    -webkit-hyphens: manual;
-  }
-
-  /* mobile: let figures fill the column — overrides the inline
-     max-width:<X>% set on <img> by the figure shortcode */
   .project-content figure img { max-width: 100% !important; }
 
-  /* mobile: compact tables — smaller font, tighter padding */
   .project-content table { font-size: var(--mm-text-2xs); }
   .project-content th,
   .project-content td {
     padding: var(--mm-sp-1) var(--mm-sp-2);
   }
 
-  /* mobile: enable horizontal scroll for wide display equations */
   .math-scroll { overflow-x: auto; }
 }
-
 
 @media (max-width: 480px) {
 
