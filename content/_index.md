@@ -201,4 +201,4 @@ to reach the goal. At the same time, prioritizing correct maneuvering
 over purely goal-directed behavior is necessary to ensure compliance
 with maritime traffic rules. Our experiments indicate that incorporating falsification improves the training process by generating more relevant scenarios, which in turn leads to more consistent rule compliance. These findings highlight the potential of combining formal methods with learning-based control to enhance the safety of autonomous systems.
 
-For a comprehensive presentation of the approach please refer to the full article **[here](https://doi.org/10.1016/j.oceaneng.2026.1255790)**.
+For a comprehensive presentation of the approach please refer to the full article **[here](https://doi.org/10.1016/j.oceaneng.2026.125579)**.
