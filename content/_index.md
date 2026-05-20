@@ -5,7 +5,7 @@ math: true
 content_public: true
 venue: "Ocean Engineering"
 
-pdf: ""
+pdf: "https://doi.org/10.1016/j.oceaneng.2026.125579"
 arxiv: "https://arxiv.org/abs/2510.06970"
 code: "https://github.com/marlonmueller/fdrl-maritime"
 
@@ -45,11 +45,16 @@ abstract: >
   more consistent rule compliance.
 
 bibtex: |
-  @article{muller2025falsification,
-  title={Falsification-Driven Reinforcement Learning for Maritime Motion Planning},
-  author={M{\"u}ller, Marlon and Finkeldei, Florian and Krasowski, Hanna and Arcak, Murat and Althoff, Matthias},
-  journal={arXiv preprint arXiv:2510.06970},
-  year={2025}
+  @article{Mueller2026.falsificationDrivenRLMaritime,
+  author = {Marlon M{\"u}ller and Florian Finkeldei and Hanna Krasowski and Murat Arcak and Matthias Althoff},
+  title = {Falsification-driven reinforcement learning for maritime motion planning},
+  journal = {Ocean Engineering},
+  volume = {361},
+  pages = {125579},
+  year = {2026},
+  issn = {0029-8018},
+  doi = {https://doi.org/10.1016/j.oceaneng.2026.125579},
+  url = {https://www.sciencedirect.com/science/article/pii/S0029801826014137},
   }
 
 references:
@@ -196,4 +201,4 @@ to reach the goal. At the same time, prioritizing correct maneuvering
 over purely goal-directed behavior is necessary to ensure compliance
 with maritime traffic rules. Our experiments indicate that incorporating falsification improves the training process by generating more relevant scenarios, which in turn leads to more consistent rule compliance. These findings highlight the potential of combining formal methods with learning-based control to enhance the safety of autonomous systems.
 
-For a comprehensive presentation of the approach please refer to the full article **[here](https://arxiv.org/abs/2510.06970)**.
+For a comprehensive presentation of the approach please refer to the full article **[here](https://doi.org/10.1016/j.oceaneng.2026.1255790)**.
