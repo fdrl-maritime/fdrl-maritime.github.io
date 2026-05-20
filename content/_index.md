@@ -5,7 +5,7 @@ math: true
 content_public: true
 venue: "Ocean Engineering"
 
-pdf: "https://doi.org/10.1016/j.oceaneng.2026.125579"
+pdf: "https://www.sciencedirect.com/science/article/pii/S0029801826014137"
 arxiv: "https://arxiv.org/abs/2510.06970"
 code: "https://github.com/marlonmueller/fdrl-maritime"
 
@@ -53,7 +53,7 @@ bibtex: |
   pages = {125579},
   year = {2026},
   issn = {0029-8018},
-  doi = {https://doi.org/10.1016/j.oceaneng.2026.125579},
+  doi = {10.1016/j.oceaneng.2026.125579},
   url = {https://www.sciencedirect.com/science/article/pii/S0029801826014137},
   }
 
@@ -201,4 +201,4 @@ to reach the goal. At the same time, prioritizing correct maneuvering
 over purely goal-directed behavior is necessary to ensure compliance
 with maritime traffic rules. Our experiments indicate that incorporating falsification improves the training process by generating more relevant scenarios, which in turn leads to more consistent rule compliance. These findings highlight the potential of combining formal methods with learning-based control to enhance the safety of autonomous systems.
 
-For a comprehensive presentation of the approach please refer to the full article **[here](https://doi.org/10.1016/j.oceaneng.2026.125579)**.
+For a comprehensive presentation of the approach please refer to the full article **[here](https://www.sciencedirect.com/science/article/pii/S0029801826014137)**.
