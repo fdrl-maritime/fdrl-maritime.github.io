@@ -125,7 +125,7 @@ The approach is implemented in Flax {{< cite 4 >}}, and based on CleanRL {{< cit
 
 ## Results
 
-On the baseline evaluation distribution, the baseline policy shows the highest goal-reaching rate (see Table 1). Compliance, including vacuous encounters, is above 95% for all methods. However, compliance on nonvacuous encounters reduces to 78.3% for the baseline, and remains more stable for the falsification-driven policies with at least 89.2%. The proportion of nonvacuous scenarios, the so-called engagement, is lower for the baseline compared to the falsification-driven approaches. Note that the baseline evaluation distribution used to
+On the baseline evaluation distribution, the baseline policy shows the highest goal-reaching rate (see Table 1). Compliance, including vacuous encounters, is above 95% for all methods. However, compliance on nonvacuous encounters reduces to 78.3% for the baseline, and remains more stable for the falsification-driven policies with at least 89.2%. The proportion of nonvacuous scenarios, the so-called engagement, is lower for the baseline compared to the falsification-driven approaches. Note that the distribution used to
 compute the metrics in Table 1 differs from the scenario distributions used to train
 the falsification-driven agents.
 
