@@ -74,8 +74,6 @@ references:
 
 ## Overview
 
-Training reinforcement learning (RL) controllers that achieve both rule compliance and task success is a central challenge in maritime autonomy. The design of the training environment and the selection of training scenarios are crucial, as they directly shape the behaviors an RL agent can learn. However, constructing scenarios that capture the complexity of maritime navigation is non-trivial, and real-world data alone is insufficient.
-
 In this article, we propose a falsification-driven training approach based on signal temporal logic (STL) specifications of maritime traffic rules. The approach generates adversarial scenarios in which rule violations occur and incorporates them into the training process. This systematically exposes the controller to safety-critical encounters (see Fig. 1).
 
 {{< figure
@@ -89,18 +87,7 @@ In this article, we propose a falsification-driven training approach based on si
 
 ## Convention on the International Regulations for Preventing Collisions at Sea
 
-The Convention on the International Regulations for Preventing Collisions at Sea (COLREGs) {{< cite 1 >}} specifies the traffic rules for open sea navigation and defines three encounter types between two power-driven vessels on a potential collision course: crossing, head-on, and overtaking. In these encounters, there are two types of vessels: give-way and stand-on vessels (see Fig. 2). We focus on scenarios where the autonomous vessel is the give-way vessel.
-
-{{< figure
-  src="/images/falsification_driven_rl/vessel_encounters.svg"
-  alt="Vessel encounters and rule-compliant maneuvers"
-  width="50%"
-  iw="1538"
-  ih="862"
-  caption="Vessel encounters and rule-compliant maneuvers."
->}}
-
-We adopt the formalization of the COLREGs from {{< cite 2 >}} and extend it with robustness measures to enable falsification. The three encounter types share a common structure: a maneuver obligation is triggered when a persistent encounter is active, and compliance requires both timely maneuvering and resolution of the collision risk within specified time bounds:
+We adopt the formalization of the COLREGs {{< cite 1 >}} from {{< cite 2 >}} and extend it with robustness measures to enable falsification. All encounter types share a common structure: a maneuver obligation is triggered when a persistent encounter is active, and compliance requires both timely maneuvering and resolution of the collision risk within specified time bounds:
 
 $$
 \begin{equation}
@@ -138,7 +125,7 @@ The approach is implemented in Flax {{< cite 4 >}}, and based on CleanRL {{< cit
 
 ## Results
 
-On the baseline evaluation distribution, the baseline policy shows the highest goal-reaching rate (see Table 1). Compliance, including vacuous encounters, is above 95% for all methods. However, compliance on nonvacuous encounters reduces to 78.3% for the baseline, and remains more stable for the falsification-driven policies with at least 89.2%. The engagement is lower for the baseline compared to the falsification-driven approaches. The input robustness is higher for the baseline. The output robustness is higher for the falsification-driven policies.  Note that the baseline evaluation distribution used to
+On the baseline evaluation distribution, the baseline policy shows the highest goal-reaching rate (see Table 1). Compliance, including vacuous encounters, is above 95% for all methods. However, compliance on nonvacuous encounters reduces to 78.3% for the baseline, and remains more stable for the falsification-driven policies with at least 89.2%. The proportion of nonvacuous scenarios, the so-called engagement, is lower for the baseline compared to the falsification-driven approaches. Note that the baseline evaluation distribution used to
 compute the metrics in Table 1 differs from the scenario distributions used to train
 the falsification-driven agents.
 
@@ -167,7 +154,7 @@ the falsification-driven agents.
 </table>
 </div>
 
-On the falsification evaluation distribution (see Table 2), the goal-reaching rate decreases for all methods. For the baseline policy, compliance, including vacuous encounters, decreases to 57.6%, with a negative mean input robustness and an engagement of 66.1%. Excluding vacuous encounters, the compliance of the baseline agent reduces further to 35.9%. The falsification-driven policies also show higher engagement rates and maintain significantly higher compliance of at least 86% when including vacuous encounters and 72% when excluding them. The mean output robustness of the falsification-driven policies increases compared to the results on the baseline evaluation distribution. For the baseline policy, the output robustness even becomes negative (i.e., non-compliant).
+On the falsification evaluation distribution (see Table 2), the goal-reaching rate decreases for all methods. For the baseline policy, excluding vacuous encounters, the compliance of the baseline agent reduces to 35.9%. The falsification-driven policies show higher engagement rates and maintain significantly higher compliance of at least 86% when including vacuous encounters and 72% when excluding them.
 
 <div class="table-scroll">
 <table>
