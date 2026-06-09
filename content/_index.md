@@ -99,7 +99,7 @@ $$
 \end{equation}
 $$
 
-The high-level predicates in (1) are built from six atomic predicates. For example, $\texttt{position\_halfplane}$ (see Fig. 3a) and $\texttt{orientation\_halfplane}$ (see Fig. 3b) define half-planes relative to the ego vessel. Conjunctions of these half-planes are used to detect whether another vessel lies in a specific angular sector or heading range relative to the ego.
+The high-level predicates in (1) are built from six atomic predicates. For example, $\texttt{position\_halfplane}$ (see Fig. 2a) and $\texttt{orientation\_halfplane}$ (see Fig. 2b) define half-planes relative to the ego vessel. Conjunctions of these half-planes are used to detect whether another vessel lies in a specific angular sector or heading range relative to the ego.
 
 STL admits quantitative semantics that assigns a robustness value to each predicate, which makes it possible to frame rule compliance testing as an optimization problem that minimizes the robustness of the specification. The robustness measures $h_\texttt{position\_halfplane}$ and $h_\texttt{orientation\_halfplane}$ are the signed distances to the half-planes, rescaled to the time domain.
 
