@@ -74,7 +74,7 @@ references:
 
 ## Overview
 
-In this article, we propose a falsification-driven training approach based on signal temporal logic (STL) specifications of maritime traffic rules. The approach generates adversarial scenarios in which rule violations occur and incorporates them into the training process. This systematically exposes the controller to safety-critical encounters (see Fig. 1).
+In this article, we propose a falsification-driven training approach based on signal temporal logic (STL) specifications of maritime traffic rules. The approach generates adversarial scenarios in which rule violations occur and incorporates them into the RL training process. This systematically exposes the controller to safety-critical encounters (see Fig. 1).
 
 {{< figure
   src="/images/falsification_driven_rl/framework_overview.svg"
@@ -87,7 +87,7 @@ In this article, we propose a falsification-driven training approach based on si
 
 ## Convention on the International Regulations for Preventing Collisions at Sea
 
-We adopt the formalization of the COLREGs {{< cite 1 >}} from {{< cite 2 >}} and extend it with robustness measures to enable falsification. All encounter types share a common structure: a maneuver obligation is triggered when a persistent encounter is active, and compliance requires both timely maneuvering and resolution of the collision risk within specified time bounds:
+We adopt the formalization of the COLREGs {{< cite 1 >}} from {{< cite 2 >}} and extend it with robustness measures to enable falsification. The vessel encounter specifications share a structure: a maneuver obligation is triggered when a persistent encounter is active. Compliance requires both timely maneuvering and resolution of the collision risk within specified time bounds:
 
 $$
 \begin{equation}
@@ -114,7 +114,8 @@ STL admits quantitative semantics that assigns a robustness value to each predic
 
 ## Interface-aware Signal Temporal Logic
 
-The specification (1) has an implication structure: the maneuver obligation only applies when an encounter is active. The common robustness semantics for STL collapse the antecedent and consequent into a single scalar value. A high robustness therefore does not necessarily indicate good maneuvering behavior. For example, a scenario where the vessels never come close to each other would yield a high robustness score due to vacuous satisfaction of the implication, even though the policy has not learned to maneuver at all.
+The specification (1) has an implication structure: the maneuver obligation only applies when an encounter is active. The common robustness semantics for STL collapse the antecedent and consequent into a single scalar value. A high robustness therefore does not necessarily indicate good maneuvering behavior. For example, a scenario where vessels never come close to each other yields a high robustness due to vacuous satisfaction of the implication
+.
 
 Interface-aware STL (IA-STL) {{< cite 3 >}} addresses this by tracking the addresses this issue by evaluating the robustness of the
 antecedent and the consequent separately. The input robustness $\rho_\mathrm{in}$ quantifies how far the scenario is from activating the encounter condition, while the output robustness $\rho_\mathrm{out}$ quantifies how well the maneuver obligation is satisfied once active. We use IA-STL to define a falsification objective that first drives the scenario towards an encounter and then minimizes the output robustness to expose a violation.
