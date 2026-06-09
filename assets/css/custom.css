@@ -670,9 +670,13 @@ a:where(.project-btn, .copy-btn, .author-link, a.cite, .ref-item-link) {
 .table-scroll {
   overflow-x: auto;
   max-width: 100%;
+  margin: var(--mm-sp-10) auto;
 }
 
-.table-scroll > table { max-width: none; }
+.table-scroll > table {
+  max-width: none;
+  margin: 0 auto;
+}
 
 .algo-block {
   display: block;

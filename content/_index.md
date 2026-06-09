@@ -106,7 +106,7 @@ STL admits quantitative semantics that assigns a robustness value to each predic
 {{< figure
   src="/images/falsification_driven_rl/atomic_predicates.svg"
   alt="Illustration of the position_halfplane and orientation_halfplane robustness measures"
-  width="48%"
+  width="55%"
   iw="1602"
   ih="972"
   caption="Illustration of atomic predicates and robustness measures (a) $h_\texttt{p} \mathrel{:=} h_\texttt{position\_halfplane}$ and (b) $h_\texttt{o} \mathrel{:=} h_\texttt{orientation\_halfplane}$ with $\beta, \gamma \mathrel{:=} \pi/4$."
